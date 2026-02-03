@@ -21,6 +21,7 @@
         <tr>
             <th th:text="#{label.name}">Nombre</th>
             <th th:text="#{label.surname}">Apellidos</th>
+            <th th:text="#{label.age}">Edad</th>
             <th th:text="#{label.username}">Username</th>
             <th th:text="#{label.type}">Tipo</th>
             <th th:text="#{label.state}">Estado</th>
@@ -30,8 +31,9 @@
         </thead>
         <tbody th:if="${list}">
         <tr th:each="employee : ${list}">
-            <td th:text="${employee.name}">Nombre</td>
-            <td th:text="${employee.surname}">Apellidos</td>
+            <td th:text="${employee.personalData.name}">Nombre</td>
+            <td th:text="${employee.personalData.surname}">Apellidos</td>
+            <td th:text="${employee.personalData.age}">Edad</td>
             <td th:text="${employee.username}">Username</td>
             <td th:text="${employee.type}">Tipo</td>
             <td th:text="${employee.state}">Estado</td>

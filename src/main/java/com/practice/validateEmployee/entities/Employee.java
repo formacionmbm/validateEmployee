@@ -14,6 +14,7 @@ import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Value;
 
 import java.time.LocalDate;
 
@@ -28,9 +29,10 @@ public class Employee {
     private long idUser;
     @NotBlank(groups = {Create.class, Modify.class})
     private String username;
-   @NotBlank(message = "{error.employee.name.notBlank}",groups = {Create.class, Modify.class})
-    private String name;
-    private String surname;
+
+    @Embedded
+    DatosPersonales personalData;
+
     @Enumerated(EnumType.STRING)
     private TypeEmployee type;
     @Enumerated(EnumType.ORDINAL)
