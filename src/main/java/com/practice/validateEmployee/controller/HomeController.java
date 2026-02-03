@@ -13,6 +13,6 @@ public class HomeController {
     @GetMapping
     public String index(){
         log.info("[index]");
-        return "redirect:/a";
+        return "redirect:/a/e";
     }
 }

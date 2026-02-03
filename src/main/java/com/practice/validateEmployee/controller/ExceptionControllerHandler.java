@@ -1,13 +1,13 @@
 package com.practice.validateEmployee.controller;
 
-import com.practice.searchEmployees.common.CodeError;
-import com.practice.searchEmployees.common.StateEmployee;
-import com.practice.searchEmployees.common.TypeEmployee;
-import com.practice.searchEmployees.services.exceptions.EmployeeNotFoundException;
-import com.practice.searchEmployees.services.exceptions.ServiceException;
+
+import com.practice.validateEmployee.common.CodeError;
+import com.practice.validateEmployee.services.exceptions.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -15,20 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Slf4j
 public class ExceptionControllerHandler {
 
-    @ExceptionHandler(EmployeeNotFoundException.class)
-    public String handleEmployeeNotFoundException(
-            EmployeeNotFoundException ex,
-            Model model
-    ) {
-        log.info("[handleEmployeeNotFoundException]");
 
-        model.addAttribute("error",CodeError.EMPLOYEE_NOT_FOUND.getMessage());
-        log.debug("[error {}]",CodeError.EMPLOYEE_NOT_FOUND.getMessage());
-
-        model.addAttribute("states", StateEmployee.values());
-        model.addAttribute("types", TypeEmployee.values());
-        return "search/t_search_employees";
-    }
 
     @ExceptionHandler(ServiceException.class)
     public String handleServiceException(
@@ -36,9 +23,20 @@ public class ExceptionControllerHandler {
             Model model
     ) {
         log.info("[handleServiceException]");
-        model.addAttribute("error",CodeError.SERVICE.getMessage());
+        model.addAttribute("error", CodeError.SERVICE.getMessage());
         log.debug("[error {}]",CodeError.SERVICE.getMessage());
         return "error/error";
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public String handleValidException(
+            MethodArgumentNotValidException maex,
+            Model model, BindingResult result
+    ) {
+        log.info("[handleValidException]");
+        model.addAttribute("errors",result.getFieldErrors());
+
+        return "/admin/t_employee_new";
     }
 
     @ExceptionHandler(Exception.class)

@@ -3,31 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/styles.css">
-    <title th:text="#{title.search.employees}">Buscador de empleados</title>
+    <title th:text="#{title.employees}">Empleados</title>
 
 </head>
 <body>
-
 <div>
-    <h1 th:text="#{title.search.employees}">Buscador de empleados</h1>
+    <a th:href="@{/a/e/n}"><img width="64" height="64" src="https://img.icons8.com/cute-clipart/64/plus.png" alt="plus"  th:text="#{title.new.employee}"/></a>
 </div>
 
 <div>
-    <form name="f_buscador" action="/b/e">
-        <label for="username" th:text="#{label.username}">Username</label>
-        <input type="text" id="username" name="username">
-        <label for="type" th:text="#{label.type}">Tipo</label>
-        <select id="type" name="type">
-            <option></option>
-            <option th:each="type:${types}" th:value="${type}" th:text="${type}"></option>
-        </select>
-        <label for="state" th:text="#{label.state}">Estado</label>
-        <select id="state" name="state">
-            <option></option>
-            <option th:each="state:${states}" th:value="${state}" th:text="${state}"></option>
-        </select>
-        <button th:text="#{form.button.go}">Enviar</button>
-    </form>
+    <h1 th:text="#{title.employees}">Empleados</h1>
 </div>
 
 <div >
@@ -39,6 +24,8 @@
             <th th:text="#{label.username}">Username</th>
             <th th:text="#{label.type}">Tipo</th>
             <th th:text="#{label.state}">Estado</th>
+            <td th:text="#{label.salary}">Salario</td>
+            <td th:text="#{label.hireDate}">Fecha Contratación</td>
         </tr>
         </thead>
         <tbody th:if="${list}">
@@ -48,15 +35,8 @@
             <td th:text="${employee.username}">Username</td>
             <td th:text="${employee.type}">Tipo</td>
             <td th:text="${employee.state}">Estado</td>
-        </tr>
-        </tbody>
-        <tbody th:if="${employee}">
-        <tr>
-            <td th:text="${employee.name}">Nombre</td>
-            <td th:text="${employee.surname}">Apellidos</td>
-            <td th:text="${employee.username}">Username</td>
-            <td th:text="${employee.type}">Tipo</td>
-            <td th:text="${employee.state}">Estado</td>
+            <td th:text="${employee.salary}">Salario</td>
+            <td th:text="${employee.hireDate}">Fecha Contratación</td>
         </tr>
         </tbody>
     </table>

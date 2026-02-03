@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface AdminService<T> {
     public List<T> findAll() throws ServiceException;
+    public void save(T element) throws ServiceException;
   }

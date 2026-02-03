@@ -33,4 +33,16 @@ public class EmployeeService implements AdminService<Employee> {
 
     }
 
+    @Override
+    public void save(Employee employee) throws ServiceException {
+        log.info("[save]");
+        log.debug("[employee: {}],employee");
+        try {
+             repository.save(employee);
+        } catch (Exception e) {
+            log.error("General Error", e);
+            throw new ServiceException();
+        }
+    }
+
 }

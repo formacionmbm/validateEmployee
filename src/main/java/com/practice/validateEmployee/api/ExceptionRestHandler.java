@@ -1,8 +1,8 @@
 package com.practice.validateEmployee.api;
 
-import com.practice.searchEmployees.common.CodeError;
-import com.practice.searchEmployees.services.exceptions.EmployeeNotFoundException;
-import com.practice.searchEmployees.services.exceptions.ServiceException;
+
+import com.practice.validateEmployee.common.CodeError;
+import com.practice.validateEmployee.services.exceptions.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -24,26 +24,7 @@ public class ExceptionRestHandler {
         this.messageSource = messageSource;
     }
 
-    @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleEmployeeNotFoundException(
-            EmployeeNotFoundException ex,
-            HttpServletRequest request,
-            Locale locale
-    ) {
-        log.info("[handleEmployeeNotFoundException]");
-        String msg = messageSource.getMessage(CodeError.EMPLOYEE_NOT_FOUND.getMessage(), null, locale);
-        ErrorResponse error = ErrorResponse.builder()
-                        .status(CodeError.EMPLOYEE_NOT_FOUND.getCode())
-                        .error("Business Error")
-                        .message(msg)
-                        .path(request.getRequestURI())
-                        .timestamp(LocalDateTime.now())
-                        .build();
-        log.debug("[error {}]",error);
-        return ResponseEntity
-                .status(CodeError.EMPLOYEE_NOT_FOUND.getCode())
-                .body(error);
-    }
+
 
     @ExceptionHandler(ServiceException.class)
     public ResponseEntity<ErrorResponse> handleServiceException(

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title th:text="#{title.new.employee}">Crear empleado</title>
+
+</head>
+<body>
+
+<div>
+    <h1 th:text="#{title.new.employee}">Crear empleado</h1>
+</div>
+
+<div>
+    <form name="f_crear" action="/a/e" method="post" th:object="${employee}">
+        <label for="username" th:text="#{label.username}">Username</label>
+        <input type="text" th:field="*{username}">
+        <div th:if="${#fields.hasErrors('username')}"
+             th:errors="*{username}"></div>
+        <label for="name" th:text="#{label.name}">Nombre</label>
+        <input type="text" th:field="*{name}">
+        <div th:if="${#fields.hasErrors('name')}"
+             th:errors="*{name}"></div>
+        <label for="surname" th:text="#{label.surname}">Apellidos</label>
+        <input type="text" th:field="*{surname}"><br>
+        <div th:if="${#fields.hasErrors('surname')}"
+             th:errors="*{username}"></div>
+        <label for="type" th:text="#{label.type}">Tipo</label>
+        <select th:field="*{type}">
+            <option th:each="typeAux:${types}" th:value="${typeAux}" th:text="${typeAux}"></option>
+        </select>
+        <div th:if="${#fields.hasErrors('type')}"
+             th:errors="*{type}"></div>
+        <label for="state" th:text="#{label.state}">Estado</label>
+        <select th:field="*{state}">
+            <option th:each="stateAux:${states}" th:value="${stateAux}" th:text="${stateAux}"></option>
+        </select><br>
+        <div th:if="${#fields.hasErrors('state')}"
+             th:errors="*{state}"></div>
+        <label for="salary" th:text="#{label.salary}">Salario</label>
+        <input type="text" th:field="*{salary}">
+        <div th:if="${#fields.hasErrors('salary')}"
+             th:errors="*{salary}"></div>
+        <label for="hireDate" th:text="#{label.hireDate}">Fecha De Contratación</label>
+        <input type="date" th:field="*{hireDate}">
+        <div th:if="${#fields.hasErrors('hireDate')}"
+             th:errors="*{hireDate}"></div>
+        <button th:text="#{form.button.go}">Enviar</button>
+    </form>
+</div>
+
+<div th:if="${errors}" class="errors">
+    <p class="error" th:each="error:${errors}" th:text="${error}"></p>
+</div>
+</body>
+</html>
