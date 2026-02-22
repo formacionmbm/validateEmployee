@@ -9,12 +9,10 @@ import com.practice.validateEmployee.common.validation.Modify;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import java.time.LocalDate;
 
@@ -31,7 +29,7 @@ public class Employee {
     private String username;
 
     @Embedded
-    DatosPersonales personalData;
+    PersonalData personalData;
 
     @Enumerated(EnumType.STRING)
     private TypeEmployee type;

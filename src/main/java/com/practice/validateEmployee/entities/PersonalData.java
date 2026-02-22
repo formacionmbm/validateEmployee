@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class DatosPersonales {
+public class PersonalData {
 
     @NotBlank(message = "{error.employee.name.notBlank}",groups = {Create.class, Modify.class})
     private String name;

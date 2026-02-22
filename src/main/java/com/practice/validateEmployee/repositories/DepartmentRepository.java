@@ -1,5 +1,6 @@
 package com.practice.validateEmployee.repositories;
 
+import com.practice.validateEmployee.entities.Department;
 import com.practice.validateEmployee.entities.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -7,14 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface EmployeeRepository extends JpaRepository<Employee,Long> {
-    Optional<Employee> findByUsername(String username);
-
+public interface DepartmentRepository extends JpaRepository<Department,Long> {
+    Optional<Department> findByName(String name);
     @Query("""
-            select ed.employee
+            select ed.department
             from EmployeeDepartment ed
-            where ed.id.idDepartment = :idDepartment
+            where ed.id.idUser = :idUser
         """)
-    public List<Employee> findEmployeeByDepartamentId(Long idDepartment);
+    public List<Department> findDepartmentsByIdUser(Long idUser);
 
 }

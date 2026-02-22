@@ -1,6 +1,6 @@
 package com.practice.validateEmployee.entities;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +9,10 @@ import org.springframework.stereotype.Component;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ActivityId {
+@Embeddable
+
+public class EmployeeDepartmentId {
 
     private int idUser;
-    private int idProyect;
+    private int idDepartment;
 }

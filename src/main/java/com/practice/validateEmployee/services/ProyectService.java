@@ -2,12 +2,11 @@ package com.practice.validateEmployee.services;
 
 
 
-import com.practice.validateEmployee.entities.Activity;
-import com.practice.validateEmployee.entities.ActivityId;
 import com.practice.validateEmployee.entities.Employee;
-import com.practice.validateEmployee.repositories.EmployeeRepository;
-import com.practice.validateEmployee.services.exceptions.ActivityNotFoundException;
+import com.practice.validateEmployee.entities.Proyect;
+import com.practice.validateEmployee.repositories.ProyectRepository;
 import com.practice.validateEmployee.services.exceptions.EmployeeNotFoundException;
+import com.practice.validateEmployee.services.exceptions.ProyectNotFoundException;
 import com.practice.validateEmployee.services.exceptions.ServiceException;
 import com.practice.validateEmployee.services.interfaces.AdminService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,16 +16,16 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class EmployeeService implements AdminService<Employee,Long> {
+public class ProyectService implements AdminService<Proyect,Long> {
 
-    EmployeeRepository repository;
+    ProyectRepository repository;
 
-    public EmployeeService(EmployeeRepository repositorio) {
+    public ProyectService(ProyectRepository repositorio) {
         this.repository = repositorio;
     }
 
     @Override
-    public List<Employee> findAll() throws ServiceException {
+    public List<Proyect> findAll() throws ServiceException {
         log.info("[findAll]");
         try {
             return repository.findAll();
@@ -36,12 +35,11 @@ public class EmployeeService implements AdminService<Employee,Long> {
         }
 
     }
-
-    public Employee findById(Long id) throws ServiceException {
+    public Proyect findById(Long id) throws ServiceException {
         log.info("[findById]");
         log.debug("[id:{}]",id);
         try {
-            return repository.findById(id).orElseThrow(EmployeeNotFoundException::new);
+            return repository.findById(id).orElseThrow(ProyectNotFoundException::new);
         } catch (ServiceException e) {
             log.error("Bussiness Error", e.getMessage());
             throw e;
@@ -53,11 +51,10 @@ public class EmployeeService implements AdminService<Employee,Long> {
     }
 
     @Override
-    public void save(Employee employee) throws ServiceException {
-        log.info("[save]");
-        log.debug("[employee: {}],employee");
+    public void save(Proyect proyect) throws ServiceException {
+        log.debug("[proyect: {}]",proyect);
         try {
-             repository.save(employee);
+             repository.save(proyect);
         } catch (Exception e) {
             log.error("General Error", e);
             throw new ServiceException();

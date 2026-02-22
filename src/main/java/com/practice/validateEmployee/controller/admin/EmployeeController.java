@@ -28,7 +28,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    AdminService<Employee>  servicio;
+    AdminService<Employee,Long>  servicio;
 
     @GetMapping
     public String findAll(Model model) throws ServiceException {
